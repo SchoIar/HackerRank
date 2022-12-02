@@ -34,6 +34,6 @@ int main() {
     cout << fixed << setprecision(1) << myDouble + d << endl;
     // Concatenate and print the String variables on a new line
     // The 's' variable above should be printed first.
-    cout << s << myString;
+    cout << s << myString << endl;
     return 0;
 }
