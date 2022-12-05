@@ -5,6 +5,14 @@
 #include <algorithm>
 using namespace std;
 
+/*
+Author: Anton Ilic
+Solution for: https://www.hackerrank.com/challenges/30-review-loop/problem
+Dec. 5th, 2022 [For day 6, Dec. 6th. Due to time conflicts had to complete it today]
+
+*/
+
+
 int main()
 {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
