@@ -9,4 +9,10 @@ for i in range(0, num):
     phoneNumber = int(entry[1])
     phoneBook[name] = phoneNumber
 
-#printing all found matches: 
+#TODO:Figure out a way to check for a newline, if found, exit the program. 
+nameSearch = input()
+for line in nameSearch:
+    if line == '\n':
+        exit(1)
+
+
