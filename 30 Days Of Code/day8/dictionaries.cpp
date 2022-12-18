@@ -6,44 +6,41 @@
 #include <map>
 using namespace std;
 /*
-Solution to day 8 of Hackerrank's 30 days of code, note: does not have optimal runtime. 
-Will try and improve performance.
+Solution to day 8 of Hackerrank's 30 days of code.
+
+Now with optimal runtime. 
 
 */
 
 int main()
 {
 
-    int numOfNamesAndNumbers;
-    cin >> numOfNamesAndNumbers;
-    string input;
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
-    map<string, string> phoneBook;
-    cin.ignore(); // Don't forget this
-    for (int i = 0; i < numOfNamesAndNumbers; i++)
+    int N;
+    string name;
+    cin >> N;
+
+    map<string, int> phone_book;
+
+    for (int i = 0; i < N; i++)
     {
-        getline(cin, input);
-        size_t space = input.find(" ");
-        string s1 = input.substr(0, space);
-        string s2 = input.substr(space + 1); // Until the end
-        phoneBook.insert(pair<string, string>(s1, s2));
+        cin >> name;
+
+        if (!phone_book[name])
+        {
+            cin >> phone_book[name];
+        }
     }
 
-    // TODO: read input, check if it doesn't pass.
-    string name;
-    while (getline(cin, name))
+    while (cin >> name)
     {
-        bool isNotFound = 1;
-        for (auto element : phoneBook)
+
+        if (phone_book[name])
         {
-            if (element.first == name){
-                cout << element.first << "=" << element.second << endl;
-                isNotFound = 0;
-            }
-               
+            cout << name << "=" << phone_book[name] << endl;
         }
-        if(isNotFound){
-            cout << "Not found" << endl;
+        else
+        {
+            cout << "Not found." << endl;
         }
     }
 
