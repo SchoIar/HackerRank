@@ -10,9 +10,13 @@ for i in range(0, num):
     phoneBook[name] = phoneNumber
 
 #TODO:Figure out a way to check for a newline, if found, exit the program. 
-nameSearch = input()
-for line in nameSearch:
-    if line == '\n':
-        exit(1)
-
+while True:
+    try:
+        queery = input()
+        if queery in phoneBook:
+            print(str(queery) + "=" + str(phoneBook[queery]))
+        else:
+            print("Not found")
+    except:
+        break
 
