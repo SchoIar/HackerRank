@@ -51,7 +51,7 @@ int main()
     Solution mylist;
     int T, data;
     cin >> T;
-    while (T-- > 0)
+    while (T-->0)
     {
         cin >> data;
         head = mylist.insert(head, data);
