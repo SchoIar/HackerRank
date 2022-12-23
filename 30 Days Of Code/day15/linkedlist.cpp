@@ -17,18 +17,22 @@ class Solution
 public:
     Node *insert(Node *head, int data)
     {
-        // Node *tempNode = head;
-        // Node *newNode;
-        // newNode->data = data;
-        // tempNode->next = newNode;
+        Node *newNode = new Node(data);
+        if (head == NULL)
+        {
+            head = newNode;
+        }
+        else
+        {
+            Node *tempNode = head;
 
-        // if(head == NULL){
-        //     Node headnode(data);
-        // }
+            while (tempNode != NULL)
+            {
+                tempNode = tempNode->next;
+            }
 
-        // while(tempNode->next != NULL){
-        //     tempNode = tempNode->next;
-        // }
+            tempNode->next = new Node(data);
+        }
 
         return head;
     }
