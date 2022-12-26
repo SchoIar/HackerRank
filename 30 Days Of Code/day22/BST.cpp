@@ -42,8 +42,6 @@ public:
             return root;
         }
     }
-
-    // Height: Check if children, if none, return, else, return height
     int getHeight(Node *root)
     {
         int heightCount = 0; // base height
@@ -51,25 +49,13 @@ public:
         {
             return -1; // error: No tree.
         }
-        
-        //check sides.
-        Node* tempNode = root;
-
-        if(tempNode->right == NULL && tempNode->left == NULL){
-            //Found a root node, check other nodes. Also base case (Only root node)
-        }else if(tempNode->right != NULL && tempNode->left != NULL){
-            //L & R child
-        }else if(tempNode->left != NULL){
-            //thus has exclusively a left child
-        }else if(tempNode->right != NULL){
-            //Exclusive right child
+        else
+        {
+            int leftHeight = getHeight(root->left);
+            int rightHeight = getHeight(root->right);
+            heightCount = 1 + max(leftHeight, rightHeight);
+            return (heightCount);
         }
-
-        return 0;
-    }
-
-    int heightHelper(Node *temp){
-        return 0;
     }
 
 }; // End of Solution
