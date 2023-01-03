@@ -30,28 +30,12 @@ public:
         {
             return head; // single element
         }
-
-        Node *firstTempNode = head;
-        Node *tempPrevious = head;
-
-        while (firstTempNode->next != NULL)
-        {
-            int numOfMatches = 0;
-            tempPrevious = firstTempNode; // to save previous element
-            firstTempNode = firstTempNode->next;
-            Node *secondTempNode = head;
-            // COMPARE currentTempNode WITH ARRAY: IF REPEATED, DELETE IT.
-
-            // while(secondTempNode != NULL){
-            //     if(secondTempNode->data == firstTempNode->data){
-            //         numOfMatches += 1;
-            //     }
-            //     if(numOfMatches == 2){
-            //         tempPrevious->next = firstTempNode->next;
-            //         delete(firstTempNode);
-            //     }
-            //     secondTempNode = secondTempNode->next;
-            // }
+        Node *current = head;
+        while(current != NULL && current->next != NULL){
+            while(current->next != NULL && current->data == current->next->data){
+                current->next = current->next->next;
+            }
+            current = current->next;
         }
 
         return head;
