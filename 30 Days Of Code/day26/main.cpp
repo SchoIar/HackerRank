@@ -7,7 +7,7 @@ using namespace std;
 
 
 int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */     int dateReturned, monthReturned, yearReturned, dueDate, dueMonth, dueYear, fine;
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */     int dateReturned, monthReturned, yearReturned, dueDate, dueMonth, dueYear, fine = 0;
 
     //Dates returned: DD MM YY
     cin >> dateReturned;
@@ -17,7 +17,6 @@ int main() {
     cin >> dueDate;
     cin >> dueMonth;
     cin >> dueYear;
-    
     //checking when date ISNT valid
     if(dueYear < yearReturned){
         //different year (Year(s) late)
