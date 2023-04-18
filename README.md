@@ -22,10 +22,10 @@ For example, to compile and run the solution for Day 1, navigate to the `Day 1` 
 
 ```sh
 g++ -o solution solution.cpp
-./solution
+./solution ```
 
 Replace g++ and the corresponding commands with the appropriate compiler and commands for your operating system if necessary.
-```
+
 ## Disclaimer
 Please use these solutions as a reference or for learning purposes only. 
 
