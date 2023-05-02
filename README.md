@@ -1,6 +1,6 @@
 # HackerRank: 30 Days of Code in C++
 
-This repository contains my solutions to the [30 Days of Code](https://www.hackerrank.com/domains/tutorials/30-days-of-code) challenge on [HackerRank](https://www.hackerrank.com/) using C++ programming language.
+This repository contains my solutions to the [30 Days of Code](https://www.hackerrank.com/domains/tutorials/30-days-of-code) challenge on [HackerRank](https://www.hackerrank.com/) using C++ programming language, aswell as Hackerrank problems done in Python. 
 
 ## About 30 Days of Code
 
