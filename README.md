@@ -18,7 +18,7 @@ Each problem is solved using C++ and the solutions are organized in separate fol
 Inside each folder, you'll find a single C++ source file named based on the function of the file, dubbed `fileName.cpp` that contains the solution to the problem for that specific day.
 
 ### HackerRank problems:
-Each problem is solved using Python and are sorted via category, and named according to their function. 
+Each problem is solved using Python and are sorted via category, and named according to their function. Please note that the solutions are not standalone, and should be used with their associated HackerRank problem.
 ## Usage
 
 ### C++ problems:
