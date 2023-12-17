@@ -1,119 +1,85 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+#include <sstream>
 #include <cctype>
 
 using namespace std;
 
-int whatType(const std::string &str)
+int whatType(const string &hand)
 {
-    int maxDuplicates = 0;
-    int secondMaxDuplicates = 0;
-
-    for (int i = 0; i < str.length(); i++)
+    map<char, int> frequency;
+    for (char card : hand)
     {
-        int count = 0;
+        if (card != ' ' && !isdigit(card))
+            frequency[card]++;
+    }
 
-        // Count duplicates of str[i]
-        for (int y = 0; y < str.length(); y++)
+    int maxCount = 0, secondMaxCount = 0;
+    for (auto pair : frequency)
+    {
+        if (pair.second > maxCount)
         {
-            if (str[i] == str[y])
-            {
-                count++;
-            }
+            secondMaxCount = maxCount;
+            maxCount = pair.second;
         }
-
-        // Update max and second max
-        if (count > maxDuplicates)
+        else if (pair.second > secondMaxCount)
         {
-            secondMaxDuplicates = maxDuplicates;
-            maxDuplicates = count;
-        }
-        else if (count > secondMaxDuplicates && count < maxDuplicates)
-        {
-            secondMaxDuplicates = count;
+            secondMaxCount = pair.second;
         }
     }
 
-    // Check for full house
-    if (maxDuplicates == 3 && secondMaxDuplicates == 2)
-    {
-        return 6; // full house
-    }
-
-    return maxDuplicates;
+    if (maxCount == 4)
+        return 4;
+    if (maxCount == 3 && secondMaxCount == 2)
+        return 6;
+    if (maxCount == 3)
+        return 3;
+    if (maxCount == 2 && secondMaxCount == 2)
+        return 2;
+    if (maxCount == 2)
+        return 1;
+    return 0;
 }
 
 int main()
 {
-    vector<string> vec;
-    string inputLine;
+    vector<string> fives, fours, fullhouses, threes, twos, ones, nones;
     int sum = 0;
 
-    int count = 0;
-    while (getline(cin, inputLine))
-    { // Reading each line of input
-        vec.push_back(inputLine);
-        count++;
-    }
-
-    vector<string> fives;      // TYPE 5
-    vector<string> fours;      // TYPE 4
-    vector<string> fullhouses; // TYPE 6
-    vector<string> threes;     // 3
-    vector<string> twos;       // 2
-    vector<string> ones;       // 1
-    vector<string> nones;      // 0
-
-    for (int i = 0; i < vec.size(); i++)
+    string line;
+    while (getline(cin, line))
     {
-        bool spaceNotFound = true;
-        string current = "";
-        for (int j = 0; j < vec[i].length(); j++)
+        string hand = line.substr(0, line.find(" "));
+        int type = whatType(hand);
+
+        switch (type)
         {
-            if (vec[i][j] == ' ')
-            {
-                spaceNotFound = false;
-                int type = whatType(current);
-                // add to that type
-                switch (type)
-                {
-                case 0:
-                    nones.push_back(vec[i]);
-                    break;
-                case 1:
-                    ones.push_back(vec[i]);
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-
-                    break;
-                case 6: // type 6; full house;
-
-                    break;
-
-                default:
-                    // error; assume none.
-                }
-
-                break;
-            }
-            else if (spaceNotFound)
-            { 
-                current = current + vec[i][j];
-            }
-            
+        case 4:
+            fours.push_back(line);
+            break;
+        case 6: 
+            fullhouses.push_back(line);
+            break;
+        case 3:
+            threes.push_back(line);
+            break;
+        case 2:
+            twos.push_back(line);
+            break;
+        case 1:
+            ones.push_back(line);
+            break;
+        default:
+            nones.push_back(line);
+            break;
         }
     }
 
-    cout << "The total winnings: " << sum << endl;
+    //TODO: Sort each group by strength (ascending). Start at 1s and add
+    //      product of value and bid.
+
+
     return 0;
 }
