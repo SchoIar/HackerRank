@@ -12,54 +12,62 @@ int whatType(const string &hand)
     map<char, int> frequency;
     for (char card : hand)
     {
-        if (card != ' ' && !isdigit(card))
-            frequency[card]++;
+        frequency[card]++;
     }
 
     int maxCount = 0, secondMaxCount = 0;
-    for (auto pair : frequency)
+    bool isPair = false, isThreeOfAKind = false;
+
+    for (const auto &pair : frequency)
     {
-        if (pair.second > maxCount)
+        if (pair.second == 2)
         {
-            secondMaxCount = maxCount;
-            maxCount = pair.second;
+            isPair = true;
+            secondMaxCount = 2;
         }
-        else if (pair.second > secondMaxCount)
+        else if (pair.second == 3)
         {
-            secondMaxCount = pair.second;
+            isThreeOfAKind = true;
+            maxCount = 3;
+        }
+        else if (pair.second == 4)
+        {
+            return 4; // four of a kind
+        } else if (pair.second == 5){
+            return 5; // five of a kind
         }
     }
 
-    if (maxCount == 4)
-        return 4;
-    if (maxCount == 3 && secondMaxCount == 2)
-        return 6;
-    if (maxCount == 3)
-        return 3;
-    if (maxCount == 2 && secondMaxCount == 2)
-        return 2;
-    if (maxCount == 2)
-        return 1;
-    return 0;
+    if (isThreeOfAKind && isPair)
+        return 6; // full house
+    if (isThreeOfAKind)
+        return 3; // three of a kind
+    if (isPair && secondMaxCount == 2)
+        return 2; // two pairs
+    if (isPair)
+        return 1; // one pair
+    return 0; // no pair or other hand
 }
 
 int main()
 {
     vector<string> fives, fours, fullhouses, threes, twos, ones, nones;
-    int sum = 0;
 
     string line;
-    while (getline(cin, line))
+    while (getline(cin, line)) //reading input; placing it into proper bins
     {
         string hand = line.substr(0, line.find(" "));
         int type = whatType(hand);
 
         switch (type)
         {
+        case 5:
+            fives.push_back(line);
+            break;
         case 4:
             fours.push_back(line);
             break;
-        case 6: 
+        case 6:
             fullhouses.push_back(line);
             break;
         case 3:
@@ -80,6 +88,9 @@ int main()
     //TODO: Sort each group by strength (ascending). Start at 1s and add
     //      product of value and bid.
 
+    for(int i = 0; i < nones.size(); i++){
+        cout << nones[i] << endl; //testing - process input here
+    }
 
     return 0;
 }
