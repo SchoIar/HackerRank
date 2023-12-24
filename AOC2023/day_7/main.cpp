@@ -17,46 +17,28 @@ int whatType(const string &hand)
 
     int maxCount = 0, secondMaxCount = 0;
     bool isPair = false, isThreeOfAKind = false;
-
-    for (const auto &pair : frequency)
+    int pairCount = 0;
+    for (auto i : frequency)
     {
-        if (pair.second == 2)
-        {
-            isPair = true;
-            secondMaxCount = 2;
-        }
-        else if (pair.second == 3)
-        {
+        if (i.second == 2)
+            pairCount = pairCount + 1;
+        if (i.second == 5)
+            return 5; // 5 of a kind
+        if (i.second == 4)
+            return 4; // 5 of a kind
+        if (i.second == 3)
             isThreeOfAKind = true;
-            maxCount = 3;
-        }
-        else if (pair.second == 4)
-        {
-            return 4; // four of a kind
-        }
-        else if (pair.second == 5)
-        {
-            return 5; // five of a kind
-        }
     }
 
-    if (isThreeOfAKind && isPair)
+    if (pairCount == 1 && isThreeOfAKind)
     {
         return 6; // full house
     }
-    if (isThreeOfAKind)
+    else if (isThreeOfAKind)
     {
-        return 3; // three of a kind
+        return 3; // three of a kind.
     }
-    if (isPair && secondMaxCount == 2)
-    {
-        return 2; // two pairs
-    }
-    if (isPair)
-    {
-        return 1; // one pair
-    }
-    return 0; // no pair or other hand
+    return pairCount; // no pair or only pairs
 }
 
 int isFirstCharGreater(const char digitOne, const char digitTwo)
@@ -105,6 +87,12 @@ void sort(vector<string> &cards)
     }
 }
 
+int findKey(const std::string &line)
+{
+    size_t spacePos = line.find(" ");
+    return stoi(line.substr(spacePos + 1));
+}
+
 int main()
 {
     vector<string> fives, fours, fullhouses, threes, twos, ones, nones;
@@ -140,13 +128,53 @@ int main()
             break;
         }
     }
-    
-    sort(nones);
 
-    for (int i = 0; i < nones.size(); i++)
+    sort(nones);
+    sort(ones);
+    sort(twos);
+    sort(threes);
+    sort(fullhouses);
+    sort(fours);
+    sort(fives);
+
+    int i = 1;
+    int keyProductSum = 0; // Start from 0 to ensure accurate summation
+
+    for (int j = 0; j < nones.size(); j++, i++)
     {
-        cout << nones[i] << endl; // testing - process input here
+        keyProductSum = keyProductSum + i * findKey(nones[j]);
     }
+
+    for (int j = 0; j < ones.size(); j++, i++)
+    {
+        keyProductSum = keyProductSum + i * findKey(ones[j]);
+    }
+
+    for (int j = 0; j < twos.size(); j++, i++)
+    {
+        keyProductSum = keyProductSum + i * findKey(twos[j]);
+    }
+
+    for (int j = 0; j < threes.size(); j++, i++)
+    {
+        keyProductSum = keyProductSum + i * findKey(threes[j]);
+    }
+
+    for (int j = 0; j < fullhouses.size(); j++, i++)
+    {
+        keyProductSum = keyProductSum + i * findKey(fullhouses[j]);
+    }
+
+    for (int j = 0; j < fours.size(); j++, i++)
+    {
+        keyProductSum = keyProductSum + i * findKey(fours[j]);
+    }
+    for (int j = 0; j < fives.size(); j++, i++)
+    {
+        keyProductSum = keyProductSum + i * findKey(fives[j]);
+    }
+
+    cout << "SUM: " << keyProductSum << endl;
 
     return 0;
 }
